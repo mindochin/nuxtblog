@@ -1,9 +1,9 @@
 <template>
   <div class="sidebar">
     <v-card class="brown lighten-5">
-      <v-card-title>
-        Категории
-      </v-card-title>
+      <v-card-subtitle>
+        Разделы
+      </v-card-subtitle>
       <v-list>
         <v-list-item
           v-for="(item, i) in items"
@@ -33,7 +33,8 @@ export default {
         {
           title: 'Inspire',
           to: '/inspire'
-        }
+        },
+        { title: 'Обо мне', to: '/post/about' }
       ]
     }
   }
