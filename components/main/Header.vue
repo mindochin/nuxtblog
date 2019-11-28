@@ -1,20 +1,60 @@
 <template>
   <div class="header">
     <v-container>
-      <v-row>
+      <v-row align="center">
         <v-col
+          cols="6"
+          md="4"
+        >
+          <span class="subtitle-1">VLADBLOG.RU</span><br>
+          <span class="caption">Записки веб-разработчика (ex. сисадмина)</span>
+        </v-col>
+        <v-col
+          cols="6"
+          md="4"
+        >
+          &nbsp;
+        </v-col>
+        <v-col
+          id="header-search"
           xs="6"
           md="4"
         >
-          VLADBLOG.RU
+          <v-text-field
+            v-model="searchString"
+            @click:append="headerSearchClick"
+            append-icon="mdi-magnify"
+            hide-details
+            filled
+            flat
+            solo
+            label="Найти что-нибудь"
+            type="text"
+          />
         </v-col>
       </v-row>
     </v-container>
   </div>
 </template>
 
+<script>
+export default {
+  data: () => ({
+    searchString: ''
+  }),
+  methods: {
+    headerSearchClick (e) {
+      alert(this.searchString)
+      // eslint-disable-next-line no-console
+      console.log(e)
+    }
+  }
+}
+</script>
+
 <style lang="scss" scoped>
 .header {
-  background: #D7CCC8;
+  background-color: #d7ccc8;
+  /*background-image: url("https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg");*/
 }
 </style>
