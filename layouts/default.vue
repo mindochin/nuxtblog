@@ -6,13 +6,15 @@
         <v-row>
           <v-col
             cols="12"
-            sm="3"
+            sm="4"
+            md="3"
           >
             <app-sidebar />
           </v-col>
           <v-col
             cols="12"
-            sm="9"
+            sm="8"
+            md="9"
           >
             <nuxt />
           </v-col>

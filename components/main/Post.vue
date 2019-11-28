@@ -49,7 +49,10 @@
 <script>
 export default {
   methods: {
-    openPost () { }
+    openPost () {
+      const id = 'uniq-id'
+      this.$router.push(`post/${id}`)
+    }
   }
 }
 </script>

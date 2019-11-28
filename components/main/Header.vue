@@ -23,6 +23,7 @@
           <v-text-field
             v-model="searchString"
             @click:append="headerSearchClick"
+            @keyup.enter="headerSearchClick"
             append-icon="mdi-magnify"
             hide-details
             filled
