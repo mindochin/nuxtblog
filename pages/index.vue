@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <v-row>
     <app-post
       v-for="post of 3"
       :key="post"
     />
-  </div>
+  </v-row>
 </template>
 
 <script>
@@ -14,3 +14,9 @@ export default {
   components: { AppPost }
 }
 </script>
+
+<style lang="scss" scoped>
+.row {
+  margin-top: -12px;
+}
+</style>sty
