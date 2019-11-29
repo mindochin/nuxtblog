@@ -1,5 +1,5 @@
 <template>
-  <v-app light>
+  <v-app :dark="false">
     <app-header />
     <v-content>
       <v-container>
@@ -31,6 +31,9 @@ import AppFooter from '@/components/main/Footer'
 import AppSidebar from '@/components/main/Sidebar'
 
 export default {
+  created: function () {
+    this.$vuetify.theme.dark = false
+  },
   components: { AppHeader, AppFooter, AppSidebar },
   data () {
     return {
