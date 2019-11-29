@@ -42,6 +42,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-
+<style lang="scss">
+.container {
+  max-width: 1185px;
+}
 </style>

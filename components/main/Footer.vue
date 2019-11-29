@@ -1,5 +1,5 @@
 <template>
-  <div class="footer">
+  <v-sheet color="primary">
     <v-container>
       <v-row>
         <v-col xs="6" md="4">
@@ -7,7 +7,7 @@
         </v-col>
       </v-row>
     </v-container>
-  </div>
+  </v-sheet>
 </template>
 
 <style lang="scss" scoped>

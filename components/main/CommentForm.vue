@@ -1,11 +1,11 @@
 <template>
-  <div class="comment-form">
+  <v-sheet color="secondary" class="comment-form">
     <template v-if="!created">
       <v-form
         ref="form"
         v-model="valid"
         @submit.native.prevent="onSubmit"
-        class="col-12 offset-md-2 col-md-8 my-5 brown lighten-5"
+        class="col-12 offset-md-2 col-md-8 my-5"
       >
         <p class="overline text-center">
           Добавить комментарий
@@ -66,7 +66,7 @@
         <v-icon>mdi-close</v-icon>
       </v-btn>
     </v-snackbar>
-  </div>
+  </v-sheet>
 </template>
 
 <script>

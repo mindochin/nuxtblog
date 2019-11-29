@@ -1,7 +1,7 @@
 <template>
   <v-card class="mb-5">
     <v-card-title class="brown lighten-5">
-      <v-avatar size="36" color="brown lighten-4" class="mr-2">
+      <v-avatar size="36" color="primary" class="mr-2">
         <v-icon dark>
           mdi-account-circle
         </v-icon>

@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <v-sheet color="primary">
     <v-container>
       <v-row align="center">
         <v-col
@@ -35,7 +35,7 @@
         </v-col>
       </v-row>
     </v-container>
-  </div>
+  </v-sheet>
 </template>
 
 <script>

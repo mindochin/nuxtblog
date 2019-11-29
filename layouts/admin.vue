@@ -64,6 +64,7 @@ export default {
   created: function () {
     this.$vuetify.theme.dark = true
   },
+  middleware: 'admin-auth',
   components: { AppAdminSidebar },
   data () {
     return {

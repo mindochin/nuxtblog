@@ -20,7 +20,6 @@
           <v-card class="elevation-12">
             <v-toolbar
               color="primary"
-              dark
               flat
             >
               <v-toolbar-title>Войти в панель управления</v-toolbar-title>
@@ -57,6 +56,7 @@
                 :disabled="!valid"
                 :loading="loading"
                 type="submit"
+                class="brown--text"
               >Войти</v-btn>
             </v-card-actions>
           </v-card>
@@ -97,6 +97,7 @@ export default {
 
         try {
           this.$store.dispatch('auth/login', formData)
+          this.$router.push('/admin')
         } catch (e) {
           this.loading = false
           console.log('e', e)

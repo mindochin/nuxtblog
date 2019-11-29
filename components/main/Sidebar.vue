@@ -1,6 +1,6 @@
 <template>
   <div class="sidebar">
-    <v-card class="brown lighten-5">
+    <v-card color="secondary">
       <v-card-subtitle>
         Разделы
       </v-card-subtitle>

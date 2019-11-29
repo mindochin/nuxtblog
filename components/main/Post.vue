@@ -34,8 +34,13 @@
       </v-card-text>
 
       <v-card-actions>
-        <v-btn @click="openPost">
-          Открыть
+        <v-btn
+          :to="`/post/${postid}`"
+          class1="brown--text"
+          outlined1
+          elevation="1"
+        >
+          Читать
         </v-btn>
         <v-spacer />
         <v-chip outlined>
@@ -48,6 +53,7 @@
 
 <script>
 export default {
+  data () { return { postid: 1} },
   methods: {
     openPost () {
       const id = 'uniq-id'
