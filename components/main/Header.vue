@@ -56,6 +56,5 @@ export default {
 <style lang="scss" scoped>
 .header {
   background-color: #d7ccc8;
-  /*background-image: url("https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg");*/
 }
 </style>

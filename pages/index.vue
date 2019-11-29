@@ -19,4 +19,4 @@ export default {
 .row {
   margin-top: -12px;
 }
-</style>sty
+</style>

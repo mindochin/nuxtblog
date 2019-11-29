@@ -66,7 +66,11 @@
       v-if="true"
       class="comments"
     >
-      <app-comment v-for="comment of 3" :key="comment" :comment="comment" />
+      <app-comment
+        v-for="comment of 3"
+        :key="comment"
+        :comment="comment"
+      />
     </div>
     <div
       v-else
@@ -82,7 +86,13 @@ import AppCommentForm from '@/components/main/CommentForm'
 import AppComment from '@/components/main/Comment'
 export default {
   components: { AppComment, AppCommentForm },
-  validate ({ params }) { return Boolean(params.id) }
+  data () {
+    return {
+    }
+  },
+  validate ({ params }) { return Boolean(params.id) },
+  methods: {
+  }
 }
 </script>
 
