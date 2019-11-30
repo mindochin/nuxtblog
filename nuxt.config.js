@@ -37,7 +37,7 @@ module.exports = {
   */
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
-    //'@nuxtjs/eslint-module',
+    // '@nuxtjs/eslint-module',
     '@nuxtjs/vuetify'
   ],
   /*
@@ -71,7 +71,15 @@ module.exports = {
           error: colors.deepOrange.accent4,
           success: colors.green.accent3
         },
-        light: {}
+        light: {
+          primary: colors.brown.lighten4,
+          secondary: colors.brown.lighten5,
+          accent: colors.deepOrange.base,
+          error: colors.orange.base,
+          warning: colors.red.base,
+          info: colors.amber.base,
+          success: colors.green.base
+        }
       }
     }
   },

@@ -71,37 +71,37 @@ export default {
   layout: 'empty',
   data: () => ({
     loading: false,
-    valid: false,
+    valid: true,
     created: false,
     snackbar: false,
     login: '',
     password: '',
     loginRules: [
       v => !!v.trim() || 'Логин обязателен',
-      v => (v.trim().length >=3 && v.trim().length <= 20) || 'Логин не менее 3 и не более 30 символов'
+      v => (v.trim().length >= 3 && v.trim().length <= 20) || 'Логин не менее 3 и не более 30 символов'
     ],
     passwordRules: [
       v => !!v.trim() || 'Пароль обязателен',
-      v => (v.trim().length >=6 && v.trim().length <= 20) || 'Пароль не менее 6 и не более 20 символов'
+      v => (v.trim().length >= 6 && v.trim().length <= 20) || 'Пароль не менее 6 и не более 20 символов'
     ]
   }),
   methods: {
     onSubmit () {
       if (this.$refs.form.validate()) {
         this.loading = true
-
+        console.log('tru', formData)
         const formData = {
           login: this.login,
           password: this.password,
         }
 
-        try {
-          this.$store.dispatch('auth/login', formData)
+
+        this.$store.dispatch('auth/login', formData).then(res => {
           this.$router.push('/admin')
-        } catch (e) {
+        }).catch(e => {
           this.loading = false
-          console.log('e', e)
-        }
+          console.log('e', formData)
+        })
       }
     }
   }
