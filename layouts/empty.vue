@@ -5,13 +5,45 @@
         <nuxt />
       </div>
     </v-content>
+    <v-snackbar
+      v-model="snackbar"
+      top
+      :color="color"
+    >
+      {{message}}
+      <v-btn
+        @click="snackbar = false"
+        text
+        icon
+      >
+        <v-icon>mdi-close</v-icon>
+      </v-btn>
+    </v-snackbar>
   </v-app>
 </template>
 
 <script>
 export default {
-  created: function () {
+  data: () => ({
+    snackbar: false,
+    color: '',
+    message: ''
+  }),
+  beforeCreated: function () {
     this.$vuetify.theme.dark = false
+  },
+  computed: {
+    error () {
+      return this.$store.getters.error
+    }
+  },
+  watch: {
+    error (value) {
+      this.message = value
+      this.color = 'error'
+      this.snackbar = true
+
+    }
   }
 }
 </script>

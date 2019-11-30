@@ -74,7 +74,6 @@ export default {
   data: () => ({
     loading: false,
     valid: false,
-    created: false,
     snackbar: false,
     name: '',
     message: '',
@@ -101,7 +100,6 @@ export default {
 
         try {
           setTimeout(() => {
-            this.created = true
             this.snackbar = true
             // this.$emit('commentCreated')})
           }, 2000)

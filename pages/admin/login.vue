@@ -72,8 +72,6 @@ export default {
   data: () => ({
     loading: false,
     valid: true,
-    created: false,
-    snackbar: false,
     login: '',
     password: '',
     loginRules: [
@@ -89,19 +87,22 @@ export default {
     onSubmit () {
       if (this.$refs.form.validate()) {
         this.loading = true
-        console.log('tru', formData)
+
         const formData = {
           login: this.login,
           password: this.password,
         }
 
-
-        this.$store.dispatch('auth/login', formData).then(res => {
-          this.$router.push('/admin')
-        }).catch(e => {
-          this.loading = false
-          console.log('e', formData)
-        })
+        this.$store.dispatch('auth/login', formData)
+          .then(res => {
+            this.$router.push('/admin')
+          })
+          .catch(e => {
+            this.loading = false
+            //this.$emit('snackbar', {'error':e})
+            //console.log('e', e)
+            //throw e
+          })
       }
     }
   }

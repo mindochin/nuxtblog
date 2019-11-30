@@ -4,6 +4,10 @@
 
 <script>
 export default {
-  layout: 'admin'
+  layout: 'admin',
+  beforeCreate () {
+    this.$store.dispatch('auth/logout')
+    this.$router.push('/admin/login')
+  }
 }
 </script>
