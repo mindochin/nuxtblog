@@ -45,13 +45,19 @@ module.exports = {
   */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/toast'
   ],
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
+  },
+  toast: {
+    position: 'top-center',
+    containerClass: 'v-application',
+    duration: 5000
   },
   /*
   ** vuetify module configuration

@@ -1,5 +1,5 @@
 <template>
-  <v-app :dark="false">
+  <v-app>
     <app-header />
     <v-content>
       <v-container>
@@ -42,7 +42,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .container {
   max-width: 1185px;
 }

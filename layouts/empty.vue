@@ -1,24 +1,24 @@
 <template>
   <v-app>
     <v-content>
-      <div class="empty-layout">
-        <nuxt />
-      </div>
-    </v-content>
-    <v-snackbar
-      v-model="snackbar"
-      top
-      :color="color"
-    >
-      {{message}}
-      <v-btn
-        @click="snackbar = false"
-        text
-        icon
+
+      <nuxt />
+
+      <v-snackbar
+        v-model="snackbar"
+        top
+        :color="color"
       >
-        <v-icon>mdi-close</v-icon>
-      </v-btn>
-    </v-snackbar>
+        {{message}}
+        <v-btn
+          @click="snackbar = false"
+          text
+          icon
+        >
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
+      </v-snackbar>
+    </v-content>
   </v-app>
 </template>
 
@@ -29,7 +29,7 @@ export default {
     color: '',
     message: ''
   }),
-  beforeCreated: function () {
+  created: function () {
     this.$vuetify.theme.dark = false
   },
   computed: {
@@ -49,7 +49,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.empty-layout {
+.container {
+  max-width: 1185px;
+}
+.empty-layout1 {
   display: flex;
   justify-content: center;
   width: 100%;

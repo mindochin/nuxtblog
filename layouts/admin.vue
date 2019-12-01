@@ -1,5 +1,5 @@
 <template>
-  <v-app :dark="true">
+  <v-app>
     <v-navigation-drawer
       v-model="drawer"
       :mini-variant="miniVariant"
@@ -44,9 +44,9 @@
       </v-btn>
     </v-app-bar>
     <v-content>
-      <v-container>
+
         <nuxt />
-      </v-container>
+
     </v-content>
     <v-footer
       :fixed="fixed"

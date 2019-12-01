@@ -18,6 +18,7 @@
           @submit.native.prevent="onSubmit"
         >
           <v-card class="elevation-12">
+
             <v-toolbar
               color="primary"
               flat
@@ -26,6 +27,7 @@
             </v-toolbar>
 
             <v-card-text>
+
               <v-text-field
                 v-model.trim="login"
                 label="Login"
@@ -108,3 +110,7 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+
+</style>
