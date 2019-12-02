@@ -35,7 +35,7 @@ export default {
         {
           icon: 'mdi-view-list',
           title: 'Статьи',
-          to: '/admin/list'
+          to: '/admin/post'
         },
         {
           icon: 'mdi-account-group',

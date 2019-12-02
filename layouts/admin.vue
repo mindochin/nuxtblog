@@ -48,12 +48,9 @@
         <nuxt />
 
     </v-content>
-    <v-footer
-      :fixed="fixed"
-      app
-    >
+    <!-- <v-footer fixed app>
       <span>&copy; 2019</span>
-    </v-footer>
+    </v-footer> -->
   </v-app>
 </template>
 
