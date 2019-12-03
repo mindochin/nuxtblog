@@ -20,7 +20,7 @@ module.exports = {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: 'blue' },
+  loading: { color: 'orange' },
   /*
   ** Global CSS
   */
@@ -31,6 +31,8 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    "~/plugins/tiptap",
+    { src: '~/plugins/tinymce', mode: 'client' }
   ],
   /*
   ** Nuxt.js dev-modules
@@ -96,6 +98,7 @@ module.exports = {
     /*
     ** You can extend webpack config here
     */
+    transpile: ['@tinymce/tinymce-vue','vuetify/lib', "tiptap-vuetify"],
     extend (config, ctx) {
     }
   }

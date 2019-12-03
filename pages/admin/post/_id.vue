@@ -66,7 +66,7 @@
                 id="previewText"
                 label="Превью текст"
                 name="previewText"
-                auto-grow
+                auto-grow0
                 :rules="previewTextRules"
                 :counter="1000"
                 requred
@@ -83,7 +83,37 @@
                 :counter="10000"
                 requred
               />
-
+              <tiptap-vuetify
+                v-model.trim="controls.previewText"
+                :extensions="extensions"
+                :toolbar-attributes="{ color: 'grey darken-4' }"
+                :card-props="{ filled: true  }"
+                :counter="10000"
+                requred
+                filled
+                auto-grow
+              />
+              <tinymce-editor
+                v-model.trim="controls.previewText"
+                api-key="no-api-key"
+                :init="{
+                  height: 500,
+                  menubar: false,
+                  plugins: [
+                    'advlist autolink lists link image charmap print preview anchor',
+                    'searchreplace visualblocks code fullscreen',
+                    'insertdatetime media table paste code help wordcount'
+                  ],
+                  toolbar:
+                    'undo redo | formatselect | bold italic backcolor | \
+                    alignleft aligncenter alignright alignjustify | \
+                    bullist numlist outdent indent | removeformat | help',
+                  skin:'oxide-dark',
+                  skin_url: '/css/mytinymceskin',
+                  content_style: 'div { background-color: grey }',
+                  selector: 'textarea'
+                }"
+              />
             </v-card-text>
             <v-card-actions>
               <v-spacer />
@@ -101,15 +131,35 @@
 </template>
 
 <script>
+import { TiptapVuetify, Heading, Bold, Italic, Strike, Underline, Code, Paragraph, BulletList, OrderedList, ListItem, Link, Blockquote, HardBreak, HorizontalRule, History, CodeBlock, Image } from 'tiptap-vuetify'
+import Editor from '@tinymce/tinymce-vue'
+
 export default {
+  components: { TiptapVuetify, 'tinymce-editor': Editor },
   layout: 'admin',
   /*validate({params, router}){
     Boolean(params.id) || this.$router.push('/admin/list')
   },*/
-  head() {
-    return {title: this.fulltitle}
+  head () {
+    return { title: this.fulltitle }
   },
   data: () => ({
+    extensions: [
+      History,
+      Paragraph,
+      Bold, Italic, Underline, Strike,
+      [Heading, {
+        options: {
+          levels: [1, 2, 3, 4, 5, 6]
+        }
+      }],
+      Blockquote,
+      Code, CodeBlock,
+      Link, Image,
+      ListItem, BulletList, OrderedList,
+      HorizontalRule,
+      HardBreak
+    ],
     loading: false,
     valid: true,
     title: 'Изменить статью',
@@ -169,3 +219,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.tox .tox_edit_area .tox-edit-area__iframe {
+  background-color: grey;
+}
+</style>

@@ -14,9 +14,12 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/toast": "^3.3.0",
+    "@tinymce/tinymce-vue": "^3.0.1",
     "cross-env": "^5.2.0",
     "express": "^4.16.4",
-    "nuxt": "^2.0.0"
+    "nuxt": "^2.0.0",
+    "tinymce": "^5.1.2",
+    "tiptap-vuetify": "^2.8.0"
   },
   "devDependencies": {
     "nodemon": "^1.18.9",
