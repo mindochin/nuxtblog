@@ -83,7 +83,7 @@
                 :counter="10000"
                 requred
               />
-              <tiptap-vuetify
+              <!-- <tiptap-vuetify
                 v-model.trim="controls.previewText"
                 :extensions="extensions"
                 :toolbar-attributes="{ color: 'grey darken-4' }"
@@ -92,27 +92,43 @@
                 requred
                 filled
                 auto-grow
-              />
+              /> -->
               <tinymce-editor
                 v-model.trim="controls.previewText"
-                api-key="no-api-key"
                 :init="{
-                  height: 500,
-                  menubar: false,
+                  height: 400,
                   plugins: [
-                    'advlist autolink lists link image charmap print preview anchor',
-                    'searchreplace visualblocks code fullscreen',
-                    'insertdatetime media table paste code help wordcount'
+                  'print preview fullpage paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars',
                   ],
                   toolbar:
                     'undo redo | formatselect | bold italic backcolor | \
                     alignleft aligncenter alignright alignjustify | \
                     bullist numlist outdent indent | removeformat | help',
-                  skin:'oxide-dark',
-                  skin_url: '/css/mytinymceskin',
-                  content_style: 'div { background-color: grey }',
-                  selector: 'textarea'
+                  skin_url: '/tinymce/skins/ui/oxide-dark',
+                  content_css : '/tinymce/skins/content/dark/content.css',
+                  image_advtab: true,
+                  autosave_ask_before_unload: true,
+                  autosave_interval: '30s',
+                autosave_prefix: '{path}{query}-{id}-',
+                autosave_restore_when_empty: false,
+                autosave_retention: '2m',
+                contextmenu: 'link image imagetools table',
+                noneditable_noneditable_class: 'mceNonEditable',
+                image_caption: true,
+                image_class_list: [
+                  { title: 'None', value: '' },
+                  { title: 'Img-responsive', value: 'img-responsive' }
+                ],
                 }"
+              />
+              <v-file-input
+                class="mt-5"
+                filled
+                show-size
+                accept="image/*"
+                counter1
+                label="Картинка к статье"
+                @change="uploadImage"
               />
             </v-card-text>
             <v-card-actions>
@@ -131,11 +147,7 @@
 </template>
 
 <script>
-import { TiptapVuetify, Heading, Bold, Italic, Strike, Underline, Code, Paragraph, BulletList, OrderedList, ListItem, Link, Blockquote, HardBreak, HorizontalRule, History, CodeBlock, Image } from 'tiptap-vuetify'
-import Editor from '@tinymce/tinymce-vue'
-
 export default {
-  components: { TiptapVuetify, 'tinymce-editor': Editor },
   layout: 'admin',
   /*validate({params, router}){
     Boolean(params.id) || this.$router.push('/admin/list')
@@ -144,22 +156,6 @@ export default {
     return { title: this.fulltitle }
   },
   data: () => ({
-    extensions: [
-      History,
-      Paragraph,
-      Bold, Italic, Underline, Strike,
-      [Heading, {
-        options: {
-          levels: [1, 2, 3, 4, 5, 6]
-        }
-      }],
-      Blockquote,
-      Code, CodeBlock,
-      Link, Image,
-      ListItem, BulletList, OrderedList,
-      HorizontalRule,
-      HardBreak
-    ],
     loading: false,
     valid: true,
     title: 'Изменить статью',
@@ -167,6 +163,7 @@ export default {
       title: '',
       previewText: '',
       detailText: '',
+      image: null,
     },
     titleRules: [
       v => !!v.trim() || 'Название обязательно',
@@ -194,14 +191,15 @@ export default {
   },
   methods: {
     onSubmit () {
-      if (this.$refs.form.validate()) {
+      if (this.$refs.form.validate() && this.image) {
         this.loading = true
 
         const formData = {
           id: this.post._id,
           title: this.controls.title,
           previewText: this.controls.previewText,
-          detailText: this.controls.detailText
+          detailText: this.controls.detailText,
+          image: this.image
         }
 
         this.$store.dispatch('post/update', formData)
@@ -214,14 +212,17 @@ export default {
             this.loading = false
             this.$toast.error('Ошибка' + e)
           })
+      } else {
+        this.$toast.error('Ошибка' + e)
       }
+
+    },
+    uploadImage (images) {
+      console.log(images)
     }
   }
 }
 </script>
 
 <style scoped>
-.tox .tox_edit_area .tox-edit-area__iframe {
-  background-color: grey;
-}
 </style>

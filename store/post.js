@@ -31,5 +31,14 @@ export const actions = {
         resolve(posts.find(p => p._id === id))
       }, 1000)
     })
+  },
+  async create ({ commit }, data) {
+    try {
+      const fd = new EormData(data)
+      console.log(fd)
+    } catch (e) {
+      commit('setError', e, { root: true })
+      throw e
+    }
   }
 }

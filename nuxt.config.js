@@ -31,8 +31,9 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    "~/plugins/tiptap",
-    { src: '~/plugins/tinymce', mode: 'client' }
+    //"~/plugins/tiptap",
+    '~/plugins/tinymce.client.js'
+    //{ src: '~/plugins/tinymce', mode: 'client' }
   ],
   /*
   ** Nuxt.js dev-modules
@@ -98,7 +99,7 @@ module.exports = {
     /*
     ** You can extend webpack config here
     */
-    transpile: ['@tinymce/tinymce-vue','vuetify/lib', "tiptap-vuetify"],
+    transpile: ['@tinymce/tinymce-vue', 'tinymce/tinymce'],//,'vuetify/lib', "tiptap-vuetify"],
     extend (config, ctx) {
     }
   }
