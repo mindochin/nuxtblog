@@ -97,13 +97,14 @@ export default {
 
         this.$store.dispatch('auth/login', formData)
           .then(res => {
+            console.log('rea', res)
             this.$router.push('/admin')
           })
           .catch(e => {
             this.loading = false
             //this.$emit('snackbar', {'error':e})
-            //console.log('e', e)
-            //throw e
+            console.log('e', e)
+            throw e
           })
       }
     }
