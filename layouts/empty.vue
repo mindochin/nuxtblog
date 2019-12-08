@@ -23,25 +23,35 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   data: () => ({
     snackbar: false,
     color: '',
-    message: ''
+    message: '',
+    //error:''
   }),
   created: function () {
     this.$vuetify.theme.dark = false
   },
+  //  asyncData ({ store }) {
+  //    let error = store.getters.error
+  //    return error
+  //  },
   computed: {
-    error () {
-      return this.$store.getters.error
-    }
-  },
+      error () {
+        return this.$store.getters.error
+      }
+    //  ...mapState({
+    //   error: state => state.error
+    // })
+   },
   watch: {
     error (value) {
-      this.message = value
-      this.color = 'error'
-      this.snackbar = true
+      this.$toast.error(value)
+      // this.message = value
+      // this.color = 'error'
+      // this.snackbar = true
 
     }
   }

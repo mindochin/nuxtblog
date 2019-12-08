@@ -97,7 +97,7 @@ export default {
 
         this.$store.dispatch('auth/login', formData)
           .then(res => {
-            console.log('rea', res)
+            console.log('res', res)
             this.$router.push('/admin')
           })
           .catch(e => {
