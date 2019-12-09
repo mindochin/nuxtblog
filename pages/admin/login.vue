@@ -85,6 +85,15 @@ export default {
       v => (v.trim().length >= 6 && v.trim().length <= 20) || 'Пароль не менее 6 и не более 20 символов'
     ]
   }),
+  mounted() {
+    const {message} = this.$route.query
+
+    switch(message) {
+      case 'session':
+        this.$toast.show('Время сессии истекло. Зайдите заново.')
+        break
+    }
+  },
   methods: {
     onSubmit () {
       if (this.$refs.form.validate()) {

@@ -38,23 +38,23 @@ export default {
   //    let error = store.getters.error
   //    return error
   //  },
-  computed: {
-      error () {
-        return this.$store.getters.error
-      }
-    //  ...mapState({
-    //   error: state => state.error
-    // })
-   },
-  watch: {
-    error (value) {
-      this.$toast.error(value)
-      // this.message = value
-      // this.color = 'error'
-      // this.snackbar = true
+  // computed: {
+  //     // error () {
+  //     //   return this.$store.getters.error
+  //     // }
+  //   //  ...mapState({
+  //   //   error: state => state.error
+  //   // })
+  //  },
+  // watch: {
+  //   error (value) {
+  //     this.$toast.error(value)
+  //     // this.message = value
+  //     // this.color = 'error'
+  //     // this.snackbar = true
 
-    }
-  }
+  //   }
+  // }
 }
 </script>
 

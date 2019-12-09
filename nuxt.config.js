@@ -32,7 +32,8 @@ module.exports = {
   */
   plugins: [
     //"~/plugins/tiptap",
-    '~/plugins/tinymce.client.js'
+    '~/plugins/tinymce.client.js',
+    '~/plugins/axios'
     //{ src: '~/plugins/tinymce', mode: 'client' }
   ],
   /*
