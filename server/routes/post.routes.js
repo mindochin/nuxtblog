@@ -9,6 +9,11 @@ router.post(
   '/admin',
   passport.authenticate('jwt', { session: false }),
   upload.single('image'),
+  // function (req, res, next) {
+  //   const filedata = req.file;
+  //   if (!filedata)
+  //     next(error({ statusCode: 500, message: "Error on upload file" }))//res.status(500).json({message: "Ошибка при загрузке файла"});
+  // },
   ctr.create
 )
 router.get(

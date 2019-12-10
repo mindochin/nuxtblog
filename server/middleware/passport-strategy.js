@@ -11,12 +11,13 @@ const options = {
 
 module.exports = new Strategy(options, async (payload, done) => {
   try {
-    const candidate = await User.findById(payload.userId).select('id')
-
+    const candidate = await User.findById(payload.id).select('id')
+    
     if(candidate) {
+
       done(null, candidate)
     }else{
-      done(nul, false)
+      done(null, false)
     }
   }
   catch(e) {console.error(e)}

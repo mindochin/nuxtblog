@@ -43,7 +43,7 @@ export const actions = {
     Cookies.remove('jwt-token')
   },
   autoLogin ({ dispatch }) {
-    console.log('autologin', this.app.context.req)
+    //console.log('autologin', this.app.context.req)
     const cookieStr = process.browser
       ? document.cookie
       : this.app.context.req.headers.cookie
@@ -51,7 +51,7 @@ export const actions = {
     const cookies = Cookie.parse(cookieStr || '') || {}
     const token = cookies['jwt-token']
 
-    if (isJWTvalid) {
+    if (isJWTvalid(token)) {
       dispatch('setToken', token)
     } else {
       dispatch('logout')
@@ -65,9 +65,9 @@ export const getters = {
 }
 
 function isJWTvalid (token) {
-  if(!token) {return false}
+  if (!token) { return false }
 
   const JWTdata = jwtdecode(token) || {}
   const expires = JWTdata.exp || 0
-  return new Date().getTime() / 1000 < expires
- }
+  return (new Date().getTime() / 1000) < expires
+}

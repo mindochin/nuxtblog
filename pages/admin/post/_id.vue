@@ -4,6 +4,7 @@
       <v-col>
         <v-form
           ref="form"
+          id="article-form"
           v-model="valid"
           @submit.native.prevent="onSubmit"
         >
@@ -11,38 +12,35 @@
 
             <v-toolbar color="grey darken-4">
               <v-toolbar-title>{{fulltitle}}
-                <v-divider
-                  class="mx-4"
-                  inset1
-                  dark
-                  vertical
-                />
-                <small>
-                  <v-icon
-                    small
-                    dark
-                  >
-                    mdi-clock-outline
-                  </v-icon>
-                  <span class="mr-2">
-                    {{ new Date(article.date).toLocaleString() }}
-                  </span>
-                  <v-icon
-                    small
-                    dark
-                    class="mr-1"
-                  >
-                    mdi-eye-outline
-                  </v-icon>
-                  <span class="mr-2">999</span>
-                  <v-icon
-                    small
-                    dark
-                  >
-                    mdi-comment-multiple-outline
-                  </v-icon>
-                  <span>45</span>
-                </small>
+                <template v-if="article.date">
+                  <v-divider dark />
+                  <small>
+                    <v-icon
+                      small
+                      dark
+                    >
+                      mdi-clock-outline
+                    </v-icon>
+                    <span class="mr-2">
+                      {{ new Date(article.date).toLocaleString() }}
+                    </span>
+                    <v-icon
+                      small
+                      dark
+                      class="mr-1"
+                    >
+                      mdi-eye-outline
+                    </v-icon>
+                    <span class="mr-2">{{article.views}}</span>
+                    <v-icon
+                      small
+                      dark
+                    >
+                      {{count(article.comments)}}
+                    </v-icon>
+                    <span>45</span>
+                  </small>
+                </template>
               </v-toolbar-title>
 
             </v-toolbar>
@@ -99,7 +97,7 @@
                   :init="{
                     height: 400,
                     plugins: [
-                    'print preview fullpage paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars',
+                    'print preview fullpage paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars'
                     ],
                     toolbar:
                       'undo redo | formatselect | bold italic backcolor | \
@@ -109,11 +107,11 @@
                     content_css : '/tinymce/skins/content/dark/content.css',
                     image_advtab: true,
                     autosave_ask_before_unload: true,
-                    autosave_interval: '30s',
+                    autosave_interval: '60s',
                     autosave_prefix: '{path}{query}-{id}-',
                     autosave_restore_when_empty: false,
                     autosave_retention: '2m',
-                    contextmenu: 'link image imagetools table',
+                    contextmenu: 'imagetools table',
                     noneditable_noneditable_class: 'mceNonEditable',
                     image_caption: true,
                     image_class_list: [
@@ -160,14 +158,9 @@ export default {
   data: () => ({
     loading: false,
     valid: true,
-    title: 'Изменить статью',
-    emptyarticle: {
-      _id: null,
-      title: '',
-      preview: '',
-      detail: '',
-      image: null,
-    },
+    isNewArticle: false,
+    titleEdit: 'Изменить статью',
+    titleNew: 'Создать статью',
     titleRules: [
       v => !!v.trim() || 'Название обязательно',
       v => (v.trim().length >= 3 && v.trim().length <= 120) || 'Не менее 3 и не более 120 символов'
@@ -182,36 +175,58 @@ export default {
     ]
   }),
   computed: {
-    fulltitle: function () { return this.title + ' ID: ' + this.article._id }
+    fulltitle: function () {
+      //console.log(this)
+      //if (this.$route.params.id === 'new') {
+      if (this.isNewArticle) {
+        return this.titleNew
+      } else {
+        return this.titleEdit + ' ID: ' + this.article._id
+      }
+    }
   },
   async asyncData ({ store, params }) {
-    try {
+    if (params.id === 'new') {
+      const article = await store.dispatch('post/fetchEmptyArticle')
+      const isNewArticle = true
+      return { article, isNewArticle }
+    } else {
+      try {
         const article = await store.dispatch('post/fetchAdminById', params.id)
-        console.log('article', article)
-
         return { article }
+      }
+      catch (e) {
+        console.log('fetch article error', e)
+      }
     }
-    catch (e) { console.log(e) }
-
   },
   methods: {
     onSubmit () {
       if (this.$refs.form.validate() && this.image) {
         this.loading = true
+        // let myform = document.getElementById('article-form')
+        // let formData = new FormData(myform)
 
-
-        const formData = {
-          id: this.article._id,
+        let formData = {
           title: this.article.title,
           preview: this.article.preview,
           detail: this.article.detail,
           image: this.image
         }
 
-        this.$store.dispatch('post/update', formData)
+        let msgSuccess = 'Статья добавлена'
+        let storeRoute = 'post/create'
+
+        if (this.isNewArticle === false) {
+          msgSuccess = 'Статья обновлена'
+          storeRoute = 'post/update'
+          formData.id = this.article._id
+        }
+
+        this.$store.dispatch(storeRoute, formData)
           .then(res => {
             this.loading = false
-            this.$toast.success('Статья обновлена!')
+            this.$toast.success(msgSuccess)
             this.$router.push('/admin')
           })
           .catch(e => {
@@ -221,11 +236,10 @@ export default {
       } else {
         this.$toast.error('Ошибка. Проверьте правильность заполнения')
       }
-
     },
     uploadImage (images) {
       this.image = images
-      console.log(images)
+      //console.log(images)
     }
   }
 }

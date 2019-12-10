@@ -31,7 +31,7 @@
 
 <script>
 export default {
-  layout: 'empty',
+  //layout: 'empty',
   props: {
     error: {
       type: Object,

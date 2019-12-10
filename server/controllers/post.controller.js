@@ -1,13 +1,14 @@
 const Post = require('../models/post.model')
 
 module.exports.create = async (req, res) => {
-  const post = new Post({
-    title: req.body.title,
-    preview: req.body.preview,
-    detail: req.body.detail,
-    imageUrl: `/${req.file.filename}`
-  })
+  console.log('image', req.file)
   try {
+    const post = new Post({
+      title: req.body.title,
+      preview: req.body.preview,
+      detail: req.body.detail,
+      imageUrl: `/${req.file.filename}`
+    })
     await post.save()
     res.status(201).json(post)
   } catch (e) {
@@ -52,7 +53,7 @@ module.exports.remove = async (req, res) => {
   }
 }
 module.exports.addView = async (req, res) => {
-  const $set = {views: ++req.body.views}
+  const $set = { views: ++req.body.views }
   try {
     await Post.findOneAndUpdate({ _id: req.params.id }, { $set })
     res.status(201).json()

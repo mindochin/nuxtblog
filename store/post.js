@@ -1,8 +1,8 @@
 const posts = [
   {
     title: 'Frozen Yogurt',
-    preview:'blabla',
-    detail:'detail bla',
+    preview: 'blabla',
+    detail: 'detail bla',
     date: new Date(),
     views: 22,
     comments: [1, 2],
@@ -18,6 +18,13 @@ const posts = [
     _id: 'id2'
   }
 ]
+const emptyarticle = {
+  _id: 'new',
+  title: '',
+  preview: '',
+  detail: '',
+  image: null,
+}
 
 export const actions = {
   async fetchAdmin ({ }) {
@@ -42,10 +49,18 @@ export const actions = {
       }, 1000)
     })
   },
+  fetchEmptyArticle ({ }) {
+    return emptyarticle
+  },
   async create ({ commit }, data) {
     try {
-      const fd = new EormData(data)
-      console.log(fd)
+      const fd = new FormData()
+      fd.append('title', data.title)
+      fd.append('preview', data.preview)
+      fd.append('detail', data.detail)
+      fd.append('image', data.image, data.image.name)
+
+      return await this.$axios.$post('/api/post/admin', fd)
     } catch (e) {
       commit('setError', e, { root: true })
       throw e
