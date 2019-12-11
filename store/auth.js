@@ -33,7 +33,7 @@ export const actions = {
     }
   },
   setToken ({ commit }, token) {
-    this.$axios.setToken(token, 'Bearer')
+    this.$axios.setToken(token, 'JWT')
     commit('setToken', token)
     Cookies.set('jwt-token', token)
   },
