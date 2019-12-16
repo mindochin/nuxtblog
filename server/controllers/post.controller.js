@@ -1,7 +1,7 @@
 const Post = require('../models/post.model')
 
 module.exports.create = async (req, res) => {
-  console.log('image', req.file)
+  // console.log('image', req.file)
   try {
     const post = new Post({
       title: req.body.title,

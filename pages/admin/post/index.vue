@@ -64,8 +64,12 @@
           <v-btn
             color="green darken-4"
             @click="dialog = false"
-          >Нет, оставить</v-btn>
-          <v-btn @click="deleteItem(dialog)">Удалить</v-btn>
+          >
+            Нет, оставить
+          </v-btn>
+          <v-btn @click="deleteItem(dialog)">
+            Удалить
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -86,11 +90,11 @@ export default {
         value: 'title',
       },
       { text: 'Дата', value: 'date' },
-      { text: 'Просмторы', value: 'views' },
+      { text: 'Просмотры', value: 'views' },
       { text: 'Комментарии', value: 'comments' },
       { text: 'ID', value: '_id' },
-      { text: 'Действия', value: 'action', sortable: false },
-    ],
+      { text: 'Действия', value: 'action', sortable: false }
+    ]
   }),
   /*
     watch: {
@@ -115,7 +119,7 @@ export default {
     },
 
     async deleteItem () {
-      //confirm('Are you sure you want to delete this item?' + id)
+      // confirm('Are you sure you want to delete this item?' + id)
       try {
         await this.$store.dispatch('post/remove', this.delPost)
         this.posts = this.posts.filter(p => p._id !== this.delPost)

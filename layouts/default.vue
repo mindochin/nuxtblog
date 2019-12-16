@@ -31,13 +31,13 @@ import AppFooter from '@/components/main/Footer'
 import AppSidebar from '@/components/main/Sidebar'
 
 export default {
-  created: function () {
-    this.$vuetify.theme.dark = false
-  },
   components: { AppHeader, AppFooter, AppSidebar },
   data () {
     return {
     }
+  },
+  created () {
+    this.$vuetify.theme.dark = false
   }
 }
 </script>

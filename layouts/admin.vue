@@ -16,8 +16,8 @@
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-btn
-        @click.stop="miniVariant = !miniVariant"
         icon
+        @click.stop="miniVariant = !miniVariant"
       >
         <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
       </v-btn>
@@ -28,8 +28,8 @@
         <v-icon>mdi-application</v-icon>
       </v-btn>
       <v-btn
-        @click.stop="fixed = !fixed"
         icon
+        @click.stop="fixed = !fixed"
       >
         <v-icon>mdi-minus</v-icon>
       </v-btn>
@@ -44,9 +44,7 @@
       </v-btn>
     </v-app-bar>
     <v-content>
-
-        <nuxt />
-
+      <nuxt />
     </v-content>
     <!-- <v-footer fixed app>
       <span>&copy; 2019</span>
@@ -58,11 +56,7 @@
 import AppAdminSidebar from '@/components/admin/AppAdminSidebar'
 
 export default {
-  created: function () {
-    this.$vuetify.theme.dark = true
-  },
   components: { AppAdminSidebar },
-  middleware: 'admin-auth',
   data () {
     return {
       clipped: true,
@@ -72,6 +66,10 @@ export default {
       title: 'Управление сайтом'
     }
   },
+  created () {
+    this.$vuetify.theme.dark = true
+  },
+  middleware: 'admin-auth',
   methods: {
 
   }

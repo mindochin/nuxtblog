@@ -27,29 +27,48 @@ const emptyarticle = {
 }
 
 export const actions = {
-  async fetchAdmin ({ }) {
-    return await new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(posts)
-      }, 1000)
-    })
+  async fetchAdmin ({ commit }) {
+    try {
+      return await this.$axios.$get('/api/post/admin')
+    }
+    catch (e) {
+      commit('setError', e, { root: true })
+      throw e
+    }
   },
-  async remove ({ }, id) { },
-  async update ({ }, data) {
-    return await new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(data)
-      }, 1000)
-    })
+  async remove ({ commit }, id) {
+    try {
+      return await this.$axios.$delete(`/api/post/admin/${id}`)
+    }
+    catch (e) {
+      commit('setError', e, { root: true })
+      throw e
+    }
   },
-  async fetchAdminById ({ }, id) {
-    return await new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(posts.find(p => p._id === id))
-      }, 1000)
-    })
+  async update ({ commit }, data) {
+    try {
+      const fd = new FormData()
+      fd.append('title', data.title)
+      fd.append('preview', data.preview)
+      fd.append('detail', data.detail)
+      fd.append('image', data.image, data.image.name)
+
+      return await this.$axios.$put(`/api/post/admin/${data.id}`, fd)
+    } catch (e) {
+      commit('setError', e, { root: true })
+      throw e
+    }
   },
-  fetchEmptyArticle ({ }) {
+  async fetchAdminById ({ commit }, id) {
+    try {
+      return await this.$axios.$get(`/api/post/admin/${id}`)
+    }
+    catch (e) {
+      commit('setError', e, { root: true })
+      throw e
+    }
+  },
+  fetchEmptyArticle () {
     return emptyarticle
   },
   async create ({ commit }, data) {
