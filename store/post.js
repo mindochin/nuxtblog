@@ -1,37 +1,16 @@
-const posts = [
-  {
-    title: 'Frozen Yogurt',
-    preview: 'blabla',
-    detail: 'detail bla',
-    date: new Date(),
-    views: 22,
-    comments: [1, 2],
-    _id: 'id1'
-  },
-  {
-    title: 'Ice cream sandwich',
-    date: new Date(new Date() - 64000),
-    preview: 'blabla',
-    detail: 'detail bla',
-    views: 5,
-    comments: [],
-    _id: 'id2'
-  }
-]
 const emptyarticle = {
   _id: 'new',
   title: '',
   preview: '',
   detail: '',
-  image: null,
+  image: null
 }
 
 export const actions = {
   async fetchAdmin ({ commit }) {
     try {
       return await this.$axios.$get('/api/post/admin')
-    }
-    catch (e) {
+    } catch (e) {
       commit('setError', e, { root: true })
       throw e
     }
@@ -39,8 +18,7 @@ export const actions = {
   async remove ({ commit }, id) {
     try {
       return await this.$axios.$delete(`/api/post/admin/${id}`)
-    }
-    catch (e) {
+    } catch (e) {
       commit('setError', e, { root: true })
       throw e
     }
@@ -52,8 +30,8 @@ export const actions = {
       fd.append('preview', data.preview)
       fd.append('detail', data.detail)
       fd.append('image', data.image, data.image.name)
-
-      return await this.$axios.$put(`/api/post/admin/${data.id}`, fd)
+      console.log('fd', data.title)
+      return await this.$axios.$put(`/api/post/admin/${data.id}`, data)
     } catch (e) {
       commit('setError', e, { root: true })
       throw e
@@ -62,8 +40,7 @@ export const actions = {
   async fetchAdminById ({ commit }, id) {
     try {
       return await this.$axios.$get(`/api/post/admin/${id}`)
-    }
-    catch (e) {
+    } catch (e) {
       commit('setError', e, { root: true })
       throw e
     }
