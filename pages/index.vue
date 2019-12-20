@@ -1,8 +1,9 @@
 <template>
   <v-row>
     <app-post
-      v-for="post of 3"
-      :key="post"
+      v-for="post of posts"
+      :key="post._id"
+      :post="post"
     />
   </v-row>
 </template>
@@ -10,8 +11,12 @@
 <script>
 import AppPost from '@/components/main/Post'
 export default {
-  head: { title: 'Главная' },
-  components: { AppPost }
+  components: { AppPost },
+  async asyncData ({ store }) {
+    const posts = await store.dispatch('post/fetch')
+    return { posts }
+  },
+  head: { title: 'Главная' }
 }
 </script>
 

@@ -40,6 +40,6 @@ router.delete(
 // base
 router.get('/', ctr.getAll)
 router.get('/:id', ctr.getById)
-router.put('/:id', ctr.addView)
+router.put('/addview/:id', ctr.addView)
 
 module.exports = router

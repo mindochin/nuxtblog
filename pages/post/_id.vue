@@ -1,8 +1,8 @@
 <template>
   <article>
     <v-img
-      src="https://picsum.photos/id/11/500/300"
-      lazy-src="https://picsum.photos/id/11/10/6"
+      :src="post.imageUrl"
+      :lazy-src="post.imageUrl"
       aspect-ratio="1"
       class="grey lighten-2 mb-5"
       max-height="300"
@@ -18,7 +18,7 @@
         >
           <div class="post-header">
             <h1>
-              Jonathan Lee
+              {{ post.title }}
             </h1>
             <div class="body-2">
               <v-icon
@@ -28,7 +28,7 @@
                 mdi-clock-outline
               </v-icon>
               <span class="mr-2">
-                {{ new Date().toLocaleString() }}
+                {{ new Date(post.date).toLocaleString() }}
               </span>
               <v-icon
                 small
@@ -36,7 +36,7 @@
               >
                 mdi-comment-multiple-outline
               </v-icon>
-              <span class="mr-2">45</span>
+              <span class="mr-2">{{ post.comments.length }}</span>
               <v-icon
                 small
                 dark
@@ -44,30 +44,20 @@
               >
                 mdi-eye-outline
               </v-icon>
-              <span>999</span>
+              <span>{{ post.views }}</span>
             </div>
           </div>
         </v-col>
       </v-row>
     </v-img>
-    <main>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur consequuntur deserunt architecto ipsam, non ea hic pariatur omnis inventore explicabo!
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur consequuntur deserunt architecto ipsam, non ea hic pariatur omnis inventore explicabo!
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur consequuntur deserunt architecto ipsam, non ea hic pariatur omnis inventore explicabo!
-      </p>
-    </main>
-    <app-comment-form />
+    <main v-html="post.detail" />
+    <app-comment-form :post-id="post._id" />
     <div
-      v-if="true"
+      v-if="post.comments.length"
       class="comments"
     >
       <app-comment
-        v-for="comment of 3"
+        v-for="comment of post.comments"
         :key="comment"
         :comment="comment"
       />
@@ -86,6 +76,11 @@ import AppCommentForm from '@/components/main/CommentForm'
 import AppComment from '@/components/main/Comment'
 export default {
   components: { AppComment, AppCommentForm },
+  async asyncData ({ store, params }) {
+    await store.dispatch('post/addView', params.id)
+    const post = await store.dispatch('post/fetchById', params.id)
+    return { post }
+  },
   data () {
     return {
     }
