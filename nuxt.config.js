@@ -1,4 +1,6 @@
 const colors = require('vuetify/es5/util/colors').default
+const os = require('os')
+const hostname = os.hostname()
 
 module.exports = {
   mode: 'universal',
@@ -6,7 +8,7 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    titleTemplate: '%s - ' + process.env.npm_package_name,
+    titleTemplate: '%s | ' + hostname,
     title: process.env.npm_package_name || '',
     meta: [
       { charset: 'utf-8' },
@@ -31,10 +33,11 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    //"~/plugins/tiptap",
+    // "~/plugins/tiptap",
     '~/plugins/tinymce.client.js',
-    '~/plugins/axios'
-    //{ src: '~/plugins/tinymce', mode: 'client' }
+    '~/plugins/axios',
+    { src: '~/plugins/date.filter', ssr: false }
+    // { src: '~/plugins/tinymce', mode: 'client' }
   ],
   /*
   ** Nuxt.js dev-modules
@@ -50,7 +53,8 @@ module.exports = {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/toast'
+    '@nuxtjs/toast',
+    '@nuxtjs/pwa'
   ],
   /*
   ** Axios module configuration
@@ -101,7 +105,7 @@ module.exports = {
     /*
     ** You can extend webpack config here
     */
-    transpile: ['@tinymce/tinymce-vue', 'tinymce/tinymce'],//,'vuetify/lib', "tiptap-vuetify"],
+    transpile: ['@tinymce/tinymce-vue', 'tinymce/tinymce'], // ,'vuetify/lib', "tiptap-vuetify"],
     extend (config, ctx) {
     }
   }

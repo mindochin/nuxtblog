@@ -18,7 +18,7 @@
         mdi-clock-outline
       </v-icon>
       <span class="body-2 font-weight-light">
-        {{ new Date(comment.date).toLocaleString() }}
+        {{ comment.date | date('medium') }}
       </span>
     </v-card-title>
     <v-card-text>

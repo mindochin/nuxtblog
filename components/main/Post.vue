@@ -14,7 +14,7 @@
         <v-icon small>
           mdi-clock-outline
         </v-icon>
-        {{ new Date(post.date).toLocaleString() }}
+        {{ post.date | date('shortDate') }}
         <span class="mr-2" />
         <v-icon small>
           mdi-comment-multiple-outline

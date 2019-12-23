@@ -28,7 +28,7 @@
                 mdi-clock-outline
               </v-icon>
               <span class="mr-2">
-                {{ new Date(post.date).toLocaleString() }}
+                {{ post.date | date('longDate') }}
               </span>
               <v-icon
                 small
@@ -50,8 +50,14 @@
         </v-col>
       </v-row>
     </v-img>
-    <main class="mb-5" v-html="post.detail" />
-    <app-comment-form :post-id="post._id" @created="createCommentHandler" />
+    <main
+      class="mb-5"
+      v-html="post.detail"
+    />
+    <app-comment-form
+      :post-id="post._id"
+      @created="createCommentHandler"
+    />
     <div
       v-if="post.comments.length"
       class="comments"
@@ -81,12 +87,15 @@ export default {
     const post = await store.dispatch('post/fetchById', params.id)
     return { post }
   },
-  validate ({ params }) { return Boolean(params.id) },
   methods: {
     createCommentHandler (comment) {
       this.post.comments.unshift(comment)
     }
-  }
+  },
+  head () {
+    return { title: `${this.post.title}` }
+  },
+  validate ({ params }) { return Boolean(params.id) }
 }
 </script>
 

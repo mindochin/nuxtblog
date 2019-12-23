@@ -18,7 +18,6 @@
           @submit.native.prevent="onSubmit"
         >
           <v-card class="elevation-12">
-
             <v-toolbar
               color="primary"
               flat
@@ -27,7 +26,6 @@
             </v-toolbar>
 
             <v-card-text>
-
               <v-text-field
                 v-model.trim="login"
                 label="Login"
@@ -39,8 +37,8 @@
                 requred
               />
               <v-text-field
-                v-model.trim="password"
                 id="password"
+                v-model.trim="password"
                 label="Password"
                 name="password"
                 prepend-icon="mdi-lock"
@@ -49,7 +47,6 @@
                 :counter="20"
                 requred
               />
-
             </v-card-text>
             <v-card-actions>
               <v-spacer />
@@ -59,7 +56,9 @@
                 :loading="loading"
                 type="submit"
                 class="brown--text"
-              >Войти</v-btn>
+              >
+                Войти
+              </v-btn>
             </v-card-actions>
           </v-card>
         </v-form>
@@ -70,7 +69,6 @@
 
 <script>
 export default {
-  layout: 'empty',
   data: () => ({
     loading: false,
     valid: true,
@@ -85,10 +83,10 @@ export default {
       v => (v.trim().length >= 6 && v.trim().length <= 20) || 'Пароль не менее 6 и не более 20 символов'
     ]
   }),
-  mounted() {
-    const {message} = this.$route.query
+  mounted () {
+    const { message } = this.$route.query
 
-    switch(message) {
+    switch (message) {
       case 'session':
         this.$toast.show('Время сессии истекло. Зайдите заново.')
         break
@@ -101,26 +99,26 @@ export default {
 
         const formData = {
           login: this.login,
-          password: this.password,
+          password: this.password
         }
 
         this.$store.dispatch('auth/login', formData)
-          .then(res => {
+          .then((res) => {
             console.log('res', res)
             this.$router.push('/admin')
           })
-          .catch(e => {
+          .catch((e) => {
             this.loading = false
-            //this.$emit('snackbar', {'error':e})
+            // this.$emit('snackbar', {'error':e})
             console.log('e', e)
             throw e
           })
       }
     }
-  }
+  },
+  head () {
+    return { title: 'Вход' }
+  },
+  layout: 'empty'
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

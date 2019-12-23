@@ -15,10 +15,10 @@
         </v-toolbar>
       </template>
       <template v-slot:item.date="{ item }">
-        {{new Date(item.date).toLocaleString()}}
+        {{ new Date(item.date).toLocaleString() }}
       </template>
       <template v-slot:item.comments="{ item }">
-        {{item.comments.length}}
+        {{ item.comments.length }}
       </template>
       <template v-slot:item.action="{ item }">
         <v-tooltip top>
@@ -57,7 +57,9 @@
       max-width="290"
     >
       <v-card>
-        <v-card-title class="headline">Удалить статью?</v-card-title>
+        <v-card-title class="headline">
+          Удалить статью?
+        </v-card-title>
         <v-card-text>Это действие нельзя будет отменить.</v-card-text>
         <v-card-actions>
           <v-spacer />
@@ -79,23 +81,6 @@
 <script>
 export default {
   layout: 'admin',
-  data: () => ({
-    dialog: false,
-    delPost: null,
-    headers: [
-      {
-        text: 'Название',
-        align: 'left',
-        sortable: false,
-        value: 'title',
-      },
-      { text: 'Дата', value: 'date' },
-      { text: 'Просмотры', value: 'views' },
-      { text: 'Комментарии', value: 'comments' },
-      { text: 'ID', value: '_id' },
-      { text: 'Действия', value: 'action', sortable: false }
-    ]
-  }),
   /*
     watch: {
       dialog (val) {
@@ -107,6 +92,23 @@ export default {
     const posts = await store.dispatch('post/fetchAdmin')
     return { posts }
   },
+  data: () => ({
+    dialog: false,
+    delPost: null,
+    headers: [
+      {
+        text: 'Название',
+        align: 'left',
+        sortable: false,
+        value: 'title'
+      },
+      { text: 'Дата', value: 'date' },
+      { text: 'Просмотры', value: 'views' },
+      { text: 'Комментарии', value: 'comments' },
+      { text: 'ID', value: '_id' },
+      { text: 'Действия', value: 'action', sortable: false }
+    ]
+  }),
 
   methods: {
     editItem (id) {
@@ -125,11 +127,11 @@ export default {
         this.posts = this.posts.filter(p => p._id !== this.delPost)
         this.$toast.success('Статья удалена')
         this.dialog = false
-      }
-      catch (e) {
+      } catch (e) {
         console.log(e)
       }
-    },
+    }
   },
+  head () { return { title: 'Список статей' } }
 }
 </script>
