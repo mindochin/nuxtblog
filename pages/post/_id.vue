@@ -50,15 +50,15 @@
         </v-col>
       </v-row>
     </v-img>
-    <main v-html="post.detail" />
-    <app-comment-form :post-id="post._id" />
+    <main class="mb-5" v-html="post.detail" />
+    <app-comment-form :post-id="post._id" @created="createCommentHandler" />
     <div
       v-if="post.comments.length"
       class="comments"
     >
       <app-comment
         v-for="comment of post.comments"
-        :key="comment"
+        :key="comment._id"
         :comment="comment"
       />
     </div>
@@ -81,12 +81,11 @@ export default {
     const post = await store.dispatch('post/fetchById', params.id)
     return { post }
   },
-  data () {
-    return {
-    }
-  },
   validate ({ params }) { return Boolean(params.id) },
   methods: {
+    createCommentHandler (comment) {
+      this.post.comments.unshift(comment)
+    }
   }
 }
 </script>

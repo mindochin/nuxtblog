@@ -1,9 +1,10 @@
 <template>
   <v-sheet
+    v-if="!isCreated"
     color="secondary"
     class="comment-form"
   >
-    <template v-if="!isCreated">
+    <template>
       <v-form
         ref="form"
         v-model="valid"
@@ -66,7 +67,6 @@ export default {
   data: () => ({
     loading: false,
     valid: false,
-    snackbar: false,
     name: '',
     text: '',
     isCreated: false,
@@ -93,7 +93,7 @@ export default {
 
         try {
           const newComment = await this.$store.dispatch('comment/create', formData)
-          console.log(newComment)
+          this.$emit('created', newComment)
           this.isCreated = true
         } catch (e) {
           this.loading = false

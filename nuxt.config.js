@@ -70,7 +70,8 @@ module.exports = {
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
-      dark: false,
+      // disable: true,
+      // dark: false,
       themes: {
         dark: {
           primary: colors.blue.darken2,

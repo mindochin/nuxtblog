@@ -37,7 +37,8 @@ export default {
     }
   },
   created () {
-    this.$vuetify.theme.dark = false
+    this.$vuetify.theme.light = false
+    this.$vuetify.theme.vblog = true
   }
 }
 </script>
