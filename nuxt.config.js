@@ -1,6 +1,6 @@
-const colors = require('vuetify/es5/util/colors').default
 const os = require('os')
 const hostname = os.hostname()
+const colors = require('vuetify/es5/util/colors').default
 
 module.exports = {
   mode: 'universal',
