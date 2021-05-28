@@ -37,7 +37,7 @@
     "nuxt": "^2.0.0",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
-    "tinymce": "^5.1.4",
+    "tinymce": "^5.7.1",
     "vue-chartjs": "^3.5.0",
     "vue-upload-image": "^1.1.5"
   },
